@@ -274,7 +274,7 @@ func (d *ResourceDiff) diffChange(key string) (interface{}, interface{}, bool, b
 	if !old.Exists {
 		old.Value = nil
 	}
-	if !new.Exists || d.removed(key) {
+	if !new.Exists || d.Removed(key) {
 		new.Value = nil
 	}
 
@@ -471,7 +471,7 @@ func (d *ResourceDiff) getChange(key string) (getResult, getResult, bool) {
 
 // removed checks to see if the key is present in the existing, pre-customized
 // diff and if it was marked as NewRemoved.
-func (d *ResourceDiff) removed(k string) bool {
+func (d *ResourceDiff) Removed(k string) bool {
 	diff, ok := d.diff.Attributes[k]
 	if !ok {
 		return false
